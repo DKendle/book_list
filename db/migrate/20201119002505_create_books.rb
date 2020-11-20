@@ -5,7 +5,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :author
       t.boolean :read
       t.boolean :currently_own
-
+      
       t.timestamps
     end
   end
