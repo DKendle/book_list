@@ -1,1 +1,36 @@
 <h1>BOOKS NEW</h1>
+<h1>Add a Book to your List:</h1>
+
+
+<%= form_for @book do |f| %>
+
+<%= f.label "Read It"%>
+<%= f.check_box :read %>
+
+<%= f.label "Currently in Collection"%>
+<%= f.check_box :currently_own %><br><br>
+
+<%= f.label "Book Title" %>
+<%= f.text_field :title %><br><br>
+
+<%= f.label "Author" %>
+<%= f.text_field :author %><br><br>
+
+<h3>Book Review </h3>
+
+    <%= f.fields_for :reviews do |review| %>
+
+    <%= review.label "Review Title"%>
+    <%= review.text_field :title %><br>
+
+    <%= review.label "Rating" %>
+    <%= review.text_field :rating %><br>
+
+    <%= review.label "Description " %>
+    <%= review.text_area :description %><br>
+
+<% end %>
+
+<%= f.submit "Place Book on My List"%>
+
+<% end %>
