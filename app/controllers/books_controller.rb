@@ -14,6 +14,7 @@ class BooksController < ApplicationController
 
     def create
         book = Book.new(book_params)
+        byebug
         if book.valid?
             book.save
             redirect_to book_path(book)
@@ -34,7 +35,7 @@ class BooksController < ApplicationController
     private
 
     def book_params
-        params.require(:book).permits(:title, :author, :read, :currently_own, 
+        params.require(:book).permit(:title, :author, :read, :currently_own, 
             reviews_attributes: [
                 :title,
                 :description,
