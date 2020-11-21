@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
-
-    def index
-    end
-
-    def show
-    end
+    before_action :current_user?, only: [:edit, :update, :destroy]
 
     def new
+        @user = User.new
+        @user.books.build
     end
 
     def create
@@ -24,6 +21,13 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email)
+        params.require(:user).permit(:name, :email, 
+            books_attributes: [
+                :title,
+                :author,
+                :read,
+                :currently_own
+            ]
+        )
     end
 end
