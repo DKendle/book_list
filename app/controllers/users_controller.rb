@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
     before_action :current_user?, only: [:edit, :update, :destroy]
 
+    def login
+        @user = User.new
+    end
+
+    def show
+        @user = User.find_by(name: params[:name], password_digest: params[:password_digest])
+        byebug
+    end
+
     def new
         @user = User.new
     end

@@ -1,6 +1,6 @@
-<h1>You made it to: NEW USER<h1>
+<h1>You made it to LOGIN:</h1>
 
-<h1>Sign Up Form:</h1>
+<h1>Login Form:</h1>
 
 <%= form_for @user do |f| %>
 <%= f.label "Username" %>
@@ -11,6 +11,6 @@
 
 <%= f.label "Password" %>
 <%= f.text_field :password_digest%><br><br>
-<%= f.submit%>
+<%= f.submit "Login"%>
 
 <% end %>

@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
+helper_method :logged_in?
+helper_method :current_user?
+
 
     def current_user?
         #Check current session[:id] matches 
-        session[:id] = @user.id
+        logged_in?
+        session[:id] == @user.id
     end
 
     def logged_in?

@@ -5,10 +5,12 @@ Rails.application.routes.draw do
     resources :reviews, only: [:show, :index, :new]
   end
 
-  ####Review CRUD functions that are not nested are deactivated.
-
-  resources :users, reject: [:index] do 
+####Review CRUD functions that are not nested are deactivated.
+### Add in helper to destroy nested books when user deletes account.
+  resources :users, only: [:show, :new, :create, :edit, :update, :destroy] do 
     resources :books
   end
+
+  get "login", to: "users#login"
 
 end
