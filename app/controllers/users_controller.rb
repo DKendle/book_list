@@ -13,15 +13,19 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
-        if @user.valid?
-            @user.save
-            session[:id] = @user.id
-            redirect_to user_path(@user)
-            byebug
+        user = User.find_by(name: params[:user][:name])
+        if user.present?
+            redirect_to :root
+            #add message "That username already exists...try something else or Login"
+        elsif
+            user = User.new(user_params)
+            user.save if user.valid?
+            session[:user_id] = user.id
+            redirect_to user_path(user)
         else 
             render :new 
         end
+
     end
 
     def edit

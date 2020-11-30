@@ -7,10 +7,14 @@
 <%= f.text_field :name %><br><br>
 
 <%= f.label "Email"%>
-<%= f.text_field :email%><br><br>
+<%= f.text_field :email %><br><br>
 
 <%= f.label "Password" %>
-<%= f.text_field :password_digest%><br><br>
+<%= f.text_field :password%><br><br>
+
+<%= f.label "Password Confirmation " %>
+<%= f.text_field :password_confirmation %>
+
 <%= f.submit%>
 
 <% end %>
