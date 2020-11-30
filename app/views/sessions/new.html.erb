@@ -1,15 +1,18 @@
-<%= form_for @user do |f| %>
+<h1>You made it to SESSIONS NEW VIEW</h1>
+<h1>You made it to LOGIN:</h1>
 
-<%= f.label "Name" %>
-<%= f.text_field :name %>
+<h1>Login Form:</h1>
 
-<%= f.label "Password" %>
-<%= f.text_field :password %>
+<%= form_tag "/login" do %>
+<label>Username:</label>
+<%= text_field_tag :name %>
 
-<%= f.label "Password Confirmation " %>
-<%= f.text_field :password_confirmation %>
+<label>Password:</label>
+<%= text_field_tag :password%>
 
-<%= f.submit%>
+<label>Password Confirmation</label>
+<%= text_field_tag :password_confirmation%>
 
+<%= submit_tag "Login" %>
 
 <% end %>

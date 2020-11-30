@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     resources :books
   end
 
-  get "login", to: "sessions#new"
-  post "login", to: "sessions#create"
+  resources :sessions, only: [:new, :create, :destroy]
 
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+
+  get "/signup", to: "users#new"
 end

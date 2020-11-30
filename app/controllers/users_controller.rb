@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
     before_action :current_user?, only: [:edit, :update, :destroy]
 
-    def login
-        @user = User.new
-    end
+   
 
     def show
-        @user = User.find_by(name: params[:name], password_digest: params[:password_digest])
-        byebug
+        @user = User.find(params[:id])
+
     end
 
     def new
@@ -38,6 +36,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password_digest)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 end
