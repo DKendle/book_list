@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :books
   end
 
-  get "login", to: "users#login"
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
 
 end

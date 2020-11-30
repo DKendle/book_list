@@ -1,0 +1,15 @@
+<%= form_for @user do |f| %>
+
+<%= f.label "Name" %>
+<%= f.text_field :name %>
+
+<%= f.label "Password" %>
+<%= f.text_field :password %>
+
+<%= f.label "Password Confirmation " %>
+<%= f.text_field :password_confirmation %>
+
+<%= f.submit%>
+
+
+<% end %>
