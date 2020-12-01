@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :current_user?, only: [:edit, :update, :destroy]
+    #before_action :logged_in, only: [:show, :create, :edit, :update, :destroy]
 
    
 
@@ -13,15 +13,11 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.find_by(name: params[:user][:name])
-        if user.present?
-            redirect_to :root
-            #add message "That username already exists...try something else or Login"
-        elsif
-            user = User.new(user_params)
-            user.save if user.valid?
-            session[:user_id] = user.id
-            redirect_to user_path(user)
+        @user = User.new(user_params)
+        if @user.valid?
+            @user.save 
+            session[:user_id] = @user.id
+            redirect_to user_path(@user)
         else 
             render :new 
         end
@@ -29,12 +25,14 @@ class UsersController < ApplicationController
     end
 
     def edit
+      
     end
 
     def update
     end
 
     def destroy
+       
     end
 
     private
