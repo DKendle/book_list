@@ -11,9 +11,10 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             redirect_to user_path(user)
         else
-           redirect_to :root 
+           redirect_to :login
+           #add flash message that says something went wrong
+           #try again
         end
- 
     end
 
     #will end a user's session by clearing a session value
