@@ -4,7 +4,7 @@ class UsersController < ApplicationController
    
 
     def show
-        if logged_in?
+        if logged_in? 
             @user = User.find_by(id: session[:user_id])
         else
             redirect_to :root
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:username , :email, :password, :password_confirmation)
     end
 
     def logged_in?

@@ -4,5 +4,5 @@ class User < ApplicationRecord
     has_secure_password
     accepts_nested_attributes_for :books, allow_destroy: true
     validates_presence_of :password
-    validates_uniqueness_of :name 
+    validates_uniqueness_of :username 
 end
