@@ -1,10 +1,10 @@
-<h1>BOOKS INDEX</h1>
+<h1><%= @user.username %></h1>
 
 <%= link_to "Add a New Book", new_user_book_path(@user, @books) %>
 
 <ul>
     <% @books.each do |book| %>
-        <li><%= book.title %></li>
+        <li><%= link_to book.title, user_book_path(@user, book) %></li>
     <% end %>
 
 </ul>
