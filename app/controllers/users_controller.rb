@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     def show
         if logged_in? 
             @user = User.find_by(id: session[:user_id])
+            @user.books.build
         else
             redirect_to :root
             ##message: You need to be logged in to do that.
@@ -30,10 +31,21 @@ class UsersController < ApplicationController
     end
 
     def edit
-      
+        @user = User.find_by(id: session[:user_id])
+        
     end
 
     def update
+        user = User.find_by(id: session[:user_id])
+        user.update(user_params)
+        if user.valid?
+            user.save
+            redirect_to user_path(user)
+        else
+            render :edit 
+            ##message: Something went wrong, try again.
+        end
+
     end
 
     def destroy
@@ -46,10 +58,17 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:username , :email, :password, :password_confirmation)
+        params.require(:user).permit(:username , :email, :password, :password_confirmation,
+            books_attributes: [
+                :title,
+                :author,
+                :read,
+                :currently_own
+
+            ]
+        
+        )
     end
 
-    def logged_in?
-        session[:user_id].present?
-     end
+   
 end

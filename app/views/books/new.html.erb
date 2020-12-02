@@ -2,7 +2,7 @@
 <h1>Add a Book to your List:</h1>
 
 
-<%= form_for @book do |f| %>
+<%= form_for [@user, @book] do |f| %>
 
 <%= f.label "Read It"%>
 <%= f.check_box :read %>
@@ -16,21 +16,8 @@
 <%= f.label "Author" %>
 <%= f.text_field :author %><br><br>
 
-<h3>Book Review </h3>
 
-    <%= f.fields_for :reviews do |review| %>
 
-    <%= review.label "Review Title"%>
-    <%= review.text_field :title %><br>
-
-    <%= review.label "Rating" %>
-    <%= review.text_field :rating %><br>
-
-    <%= review.label "Description " %>
-    <%= review.text_area :description %><br>
-
-<% end %>
-
-<%= f.submit "Place Book on My List"%>
+<%= f.submit "Place Book on My Shelf"%>
 
 <% end %>

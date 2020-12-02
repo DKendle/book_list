@@ -1,23 +1,36 @@
 class BooksController < ApplicationController
 
     def index
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            @books = @user.books
+        else
+            redirect_to :root
+        end
+    
     end
 
     def show
-        @book
+        @book = Book.find_by(id: params[:id])
     end
 
     def new
-        @book = Book.new
-        @book.reviews.build
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            @book = Book.new
+        else 
+            redirect_to :root 
+        end
+        #@review = @book.reviews.build
     end
 
     def create
         book = Book.new(book_params)
-        byebug
         if book.valid?
             book.save
-            redirect_to book_path(book)
+            user = User.find_by(id: session[:user_id])
+            user.books << book
+            redirect_to user_books_path
         else 
             render :new
         end
@@ -39,8 +52,7 @@ class BooksController < ApplicationController
             reviews_attributes: [
                 :title,
                 :description,
-                :rating,
-                :user_id
+                :rating
             ]
         )
     end

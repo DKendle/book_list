@@ -1,10 +1,33 @@
 <h1>You Made it to: SHOW</h1>
-<h3><%= button_to "Logout",  logout_path %></h3>
+<%= link_to "Logout",  logout_path, method: :post %>
+<%= link_to "Edit Profile", edit_user_path(@user)%>
+<%= link_to "Your Collection", user_books_path(@user) %>
 
-<h3>Welcome: <%= @user.username %></h3>
+<hr>
+
+<h3>Welcome Back: <%= @user.username %></h3>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
 
 <h3><%= button_to "Delete Profile", user_path(@user), method: :delete, data: 
     {confirm: "Your profile will be gone forever...are you sure?"}%></h3>

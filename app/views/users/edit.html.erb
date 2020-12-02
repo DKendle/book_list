@@ -1,12 +1,14 @@
 <h1>You Made it to: EDIT</h1>
 
 <%= form_for @user do |f| %>
-<%= f.label "Username" %>
-<%= f.text_field :username  %>
+    <%= f.label "Username" %>
+    <%= f.text_field :username  %>
 
-<%= f.label "Email" %>
-<%= f.text_field :email %>
+    <%= f.label "Email" %>
+    <%= f.text_field :email %>
 
-    <%= f.fields_for @book%>
+    <%= f.label "Password" %>
+    <%= f.text_field :password %>
 
+    <%= f.submit "Submit Changes" %>
 <% end %>

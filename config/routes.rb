@@ -7,14 +7,15 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new"
   
+  resources :users, only: [:new, :create, :edit, :update, :destroy]
 
 ####Review CRUD functions that are not nested are deactivated.
-### Add in helper to destroy nested books when user deletes account.
-  resources :users, only: [:show, :new, :create, :edit, :update, :destroy] do 
+
+  resources :users, only: [:show] do 
     resources :books
   end
 
-  resources :books do
+  resources :books, only: [:show] do
     resources :reviews, only: [:show, :index, :new]
   end
 
