@@ -11,9 +11,15 @@ class BooksController < ApplicationController
     end
 
     def show
-
-        @user = User.find_by(id: session[:user_id])
-        @book = Book.find_by(id: params[:id])
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            @book = @user.books.find_by(id: params[:id])
+            if @book.nil?
+                redirect_to user_books_path
+            end
+        else
+            redirect_to :root 
+        end
         
     end
 
@@ -46,6 +52,9 @@ class BooksController < ApplicationController
     end
 
     def destroy
+        book = Book.find_by(id: params[:id])
+        book.destroy
+        redirect_to user_books_path
     end
 
     private

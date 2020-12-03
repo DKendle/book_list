@@ -3,3 +3,5 @@
 <b><%= @book.title %></b><br>
 By: <%= @book.author%><br>
 <hr>
+<%= button_to "Delete Book", user_book_path(@user, @book), method: :delete,
+data: { confirm: "Delete this Book from your collection?" }%>
