@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
 
     def new
+        user = User.find_by(id: session[:user_id])
+        if logged_in?
+            redirect_to user_path(user)
+        end
     end
 
 
@@ -15,6 +19,7 @@ class SessionsController < ApplicationController
            #add flash message that says something went wrong
            #try again
         end
+
     end
 
     #will end a user's session by clearing a session value

@@ -1,4 +1,7 @@
 <h1>BOOKS SHOW</h1>
+<%= link_to "Edit Book", edit_user_book_path(@user, @book)%>
+<%= link_to "Back Dashboard", user_path(@user) %>
+<hr>
 
 <b><%= @book.title %></b><br>
 By: <%= @book.author%><br>

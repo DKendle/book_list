@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new"
   
   resources :users, only: [:new, :create, :edit, :update, :destroy]
-
 ####Review CRUD functions that are not nested are deactivated.
 
   resources :users, only: [:show] do 
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :books, only: [:show] do
-    resources :reviews, only: [:show, :index, :new]
+    resources :reviews, only: [:show, :index, :new, :create]
   end
 
   

@@ -1,1 +1,21 @@
 <h1>BOOKS EDIT</h1>
+
+<%= form_for [@user, @book] do |f| %>
+
+<%= f.label "Read It"%>
+<%= f.check_box :read %>
+
+<%= f.label "Currently in Collection"%>
+<%= f.check_box :currently_own %><br><br>
+
+<%= f.label "Book Title" %>
+<%= f.text_field :title %><br><br>
+
+<%= f.label "Author" %>
+<%= f.text_field :author %><br><br>
+
+
+
+<%= f.submit %>
+
+<% end %>

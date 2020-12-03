@@ -46,9 +46,21 @@ class BooksController < ApplicationController
     end
 
     def edit
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            @book = @user.books.find_by(id: params[:id])    
+        end
     end
 
     def update
+        @user = User.find_by(id: session[:user_id])
+        @book = @user.books.find_by(id: params[:id])
+        if !@book.nil? && @book.valid?
+            @book.update(book_params)
+            redirect_to user_books_path(@book)
+        else  
+            render :edit 
+        end
     end
 
     def destroy

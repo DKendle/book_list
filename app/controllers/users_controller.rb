@@ -15,7 +15,12 @@ class UsersController < ApplicationController
     end
 
     def new
-        @user = User.new
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            redirect_to user_path(@user)
+        else
+            @user = User.new
+        end
     end
 
     def create
