@@ -3,8 +3,30 @@
 <p>Can't remember if you have bought this book before or if you are just a fan of the author?</p>
 <p>Well make yourself at home in our cozy little app that was created to help you keep track of all the book titles in your collection.</p>
 
+
+
+<% if session[:user_id] %>
+    <h1><%= @user.username %></h1>
+    <h2>Email: <%= @user.email %></h2>
+
+<% else %>
+<%= link_to 'Log in with Google', '/auth/google_oauth2'%>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
 <h1>Choose One of the Following:</h1>
 
 <b><%= link_to "Sign Up", new_user_path%><b><br>
 
-<b><%= link_to "Login", login_path %><b>
+<b><%= link_to "Login", login_path %><b><br>
+
