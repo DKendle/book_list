@@ -1,1 +1,7 @@
 <h1>REVIEW SHOW</h1>
+
+<h1><%= @review.title %></h1>
+<p><%= @review.description %></p>
+
+<%= link_to "Book", user_book_path(@review.user)%>
+

@@ -16,9 +16,10 @@ Rails.application.routes.draw do
     resources :books
   end
 
-  resources :books, only: [:show] do
+  resources :users, only: [:show] do
     resources :reviews
   end
+
 
   
   
