@@ -27,6 +27,7 @@ class BooksController < ApplicationController
         if logged_in?
             @user = User.find_by(id: session[:user_id])
             @book = Book.new
+            @book.reviews.build
         else 
             redirect_to :root 
         end
@@ -34,15 +35,17 @@ class BooksController < ApplicationController
     end
 
     def create
+        user = User.find_by(id: session[:user_id])
         book = Book.new(book_params)
+        byebug
         if book.valid?
             book.save
-            user = User.find_by(id: session[:user_id])
             user.books << book
             redirect_to user_books_path
         else 
             render :new
         end
+        byebug
     end
 
     def edit

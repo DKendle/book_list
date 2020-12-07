@@ -16,7 +16,17 @@
 <%= f.label "Author" %>
 <%= f.text_field :author %><br><br>
 
+<b>Add Review:</b><br>
 
+    <%= f.fields_for :reviews do |review| %>
+        <%= review.label "Review Title" %>
+        <%= review.text_field :title %><br>
+
+        <%= review.label "Description" %>
+        <%= review.text_field :description %><br>
+
+
+    <% end%>
 
 <%= f.submit "Place Book on My Shelf"%>
 
