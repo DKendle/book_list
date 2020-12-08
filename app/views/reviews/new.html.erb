@@ -1,8 +1,8 @@
-<h1>REVIEW NEW</h1> 
+<h1>Create a New Review:</h1> 
 
 <%= form_for [@user, @review] do |f| %>
     <%= f.label "Choose a book to Review" %>
-    <%= f.collection_select(:book_id, Book.all, :id, :title)%><br><br>
+    <%= f.collection_select(:book_id, @user.books, :id, :title)%><br><br>
 
     <%= f.label "Title" %>
     <%= f.text_field :title %><br><br>
@@ -13,3 +13,5 @@
     <%= f.submit "Submit Review"%>
 
 <% end %>
+<hr>
+No Books to Review? - <%= link_to "Create a New One!", new_user_book_path(@user) %>

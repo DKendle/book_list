@@ -15,8 +15,8 @@ class UsersController < ApplicationController
     end
 
     def new
-        if logged_in?
-            @user = User.find_by(id: session[:user_id])
+        @user = User.find_by(id: session[:user_id])
+        if !@user.nil?
             redirect_to user_path(@user)
         else
             @user = User.new
@@ -59,7 +59,9 @@ class UsersController < ApplicationController
     
 ##############################
     def destroy
-       
+       @user = User.find_by(id: session[:user_id])
+       @user.destroy 
+       redirect_to :root
     end
 
     private

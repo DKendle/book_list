@@ -1,6 +1,9 @@
-<h1>Review for </h1>
+<h2>Review for: <%= link_to @book.title, user_book_path(@user, @book) %></h2>
 <%= link_to "Edit Review", edit_user_review_path(@user)%>
-<h1><%= @review.title %></h1>
+
+<h3><%= @review.title %></h3>
 <p><%= @review.description %></p>
 
+<hr>
+<%= button_to "Delete Review", user_review_path(@user), method: :delete, data: { confirm: "You you really want to delete this review?"}%>
 

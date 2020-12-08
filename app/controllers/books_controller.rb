@@ -61,7 +61,7 @@ class BooksController < ApplicationController
         @book = @user.books.find_by(id: params[:id])
         if !@book.nil? && @book.valid?
             @book.update(book_params)
-            redirect_to user_books_path(@book)
+            redirect_to user_book_path(@book)
         else  
             render :edit 
         end

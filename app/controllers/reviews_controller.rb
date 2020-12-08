@@ -1,19 +1,15 @@
 class ReviewsController < ApplicationController
 
     def index
-        if logged_in?
-            @user = User.find_by(id: session[:user_id])
-            @reviews = @user.reviews
-        else
-            redirect_to :root 
-        end
+        @user = User.find_by(id: session[:user_id])
+        @reviews = @user.reviews
     end
 
     def show
         if logged_in?
             @user = User.find_by(id: session[:user_id])
             @review = @user.reviews.find_by(id: params[:id])
-
+            @book = Book.find_by(id: @review.book_id)
         else 
             redirect_to :root 
         end
@@ -50,20 +46,20 @@ class ReviewsController < ApplicationController
     def update
         @user = User.find_by(id: session[:user_id])
         @review = @user.reviews.find_by(id: params[:id])
-        byebug
-        if !@review.nil?
+        if !@review.nil? && @review.valid?
             @review.update(review_params)
-            redirect_to user_reviews_path(@review)
+            redirect_to user_review_path(@review)
         else
             render :edit
         end
+        byebug
     end
 
     def destroy
         @user = User.find_by(id: session[:user_id])
-        @review = @user.reviews.find_by(id: params[:review_id])
+        @review = @user.reviews.find_by(id: params[:id])
         @review.destroy
-        redirect_to user_reviews_path(@review)
+        redirect_to user_reviews_path(@user)
     end
 
     private
