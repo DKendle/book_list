@@ -1,1 +1,8 @@
 <h1>REVIEW INDEX</h1>
+<%= link_to "Create a New Review?", new_user_review_path(@user)%>
+
+<ul>
+<% @reviews.each do |review| %>
+    <li><%= link_to review.title, user_review_path(@user, @reviews) %></li>
+<% end %>
+</ul>

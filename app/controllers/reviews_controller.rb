@@ -1,12 +1,18 @@
 class ReviewsController < ApplicationController
 
     def index
-
+        @user = User.find_by(id: session[:user_id])
+        @reviews = @user.reviews
     end
 
     def show
-        @review = Review.find_by(id: params[:id])
-        @review.user = User.find_by(id: session[:user_id])
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            @review = @user.reviews.find_by(id: params[:id])
+        else 
+            redirect_to :root 
+        end
+        byebug
     end
 
     def new
@@ -20,22 +26,39 @@ class ReviewsController < ApplicationController
         @review.user = @user
         if @review.valid?
             @review.save
-            redirect_to user_path(@review)
+            redirect_to user_reviews_path(@review)
         else
             render :new
         end
     end
 
     def edit
-
+        if logged_in?
+            @user = User.find_by(id: session[:user_id])
+            @review = @user.reviews.find_by(id: params[:review_id])
+        else
+            redirect_to :root 
+        end
+    
+            
     end
 
     def update
-
+        @user = User.find_by(id: session[:user_id])
+        @review = @user.reviews.find_by(id: params[:review_id])
+        if !@review.nil? && @review.valid?
+            @review.update(review_params)
+            redirect_to user_reviews_path(@review)
+        else
+            render :edit
+        end
     end
 
     def destroy
-
+        @user = User.find_by(id: session[:user_id])
+        @review = @user.reviews.find_by(id: params[:review_id])
+        @review.destroy
+        redirect_to user_reviews_path(@review)
     end
 
     private

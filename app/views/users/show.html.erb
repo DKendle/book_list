@@ -1,7 +1,8 @@
 <h1>You Made it to: SHOW</h1>
 <%= link_to "Logout",  logout_path, method: :post %>
 <%= link_to "Edit Profile", edit_user_path(@user)%>
-<%= link_to "Your Collection", user_books_path(@user) %>
+<%= link_to "Book Collection", user_books_path(@user) %>
+<%= link_to "Reviews", user_reviews_path(@user) %>
 
 <hr>
 

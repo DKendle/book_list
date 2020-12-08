@@ -27,7 +27,8 @@ class BooksController < ApplicationController
         if logged_in?
             @user = User.find_by(id: session[:user_id])
             @book = Book.new
-            @book.reviews.build
+            #@book.reviews.build
+            #have to tell the form to expect an empty reviews model to build
         else 
             redirect_to :root 
         end
@@ -37,15 +38,16 @@ class BooksController < ApplicationController
     def create
         user = User.find_by(id: session[:user_id])
         book = Book.new(book_params)
-        byebug
         if book.valid?
             book.save
             user.books << book
+            #review = book.reviews.create(review_params)
             redirect_to user_books_path
+
         else 
             render :new
         end
-        byebug
+  
     end
 
     def edit
@@ -76,11 +78,11 @@ class BooksController < ApplicationController
 
     def book_params
         params.require(:book).permit(:title, :author, :read, :currently_own, 
-            reviews_attributes: [
-                :title,
-                :description,
-                :rating
-            ]
+            reviews_attributes:[:title, :description]
         )
+    end
+
+    def review_params
+        params.require(:reviews).permit(:title, :description, :rating)
     end
 end
