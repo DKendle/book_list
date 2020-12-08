@@ -16,16 +16,16 @@
 <%= f.label "Author" %>
 <%= f.text_field :author %><br><br>
 
-
+<h3>Leave a Review?</h3>
 <%= f.fields_for :reviews do |ff| %>
     <%= ff.hidden_field :user_id, value: @user.id %>
 
 
     <%= ff.label "Title" %>
-    <%= ff.text_field :title %>
+    <%= ff.text_field :title %><br><br>
 
-    <%= ff.label "Description" %>
-    <%= ff.text_area :description %>
+    <%= ff.label "Description" %><br>
+    <%= ff.text_area :description %><br>
 
 <% end %>
 

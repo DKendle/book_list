@@ -3,6 +3,8 @@
 
 <ul>
 <% @reviews.each do |review| %>
-    <li><%= link_to review.title, user_review_path(@user, @reviews) %></li>
+    <li>
+    <%= link_to review.title, user_review_path(@user, review)%>
+    </li>
 <% end %>
 </ul>

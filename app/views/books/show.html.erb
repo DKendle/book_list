@@ -2,10 +2,12 @@
 <%= link_to "Edit Book", edit_user_book_path(@user, @book)%>
 <%= link_to "Back Dashboard", user_path(@user) %>
 <%= link_to "Leave a Review", new_user_review_path(@user)%>
+
 <hr>
 
 <b><%= @book.title %></b><br>
 By: <%= @book.author%><br>
+
 <hr>
 <%= button_to "Delete Book", user_book_path(@user, @book), method: :delete,
 data: { confirm: "Delete this Book from your collection?" }%>

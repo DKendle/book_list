@@ -38,10 +38,8 @@ class BooksController < ApplicationController
     def create
         @user = User.find_by(id: session[:user_id])
         @book = Book.new(book_params)
-        byebug
         if @book.valid?
             @book.save
-            @user.books << @book
             #review = book.reviews.create(review_params)
             redirect_to user_books_path
 
