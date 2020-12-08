@@ -17,6 +17,18 @@
 <%= f.text_field :author %><br><br>
 
 
+<%= f.fields_for :reviews do |ff| %>
+    <%= ff.hidden_field :user_id, value: @user.id %>
+
+
+    <%= ff.label "Title" %>
+    <%= ff.text_field :title %>
+
+    <%= ff.label "Description" %>
+    <%= ff.text_area :description %>
+
+<% end %>
+
 <%= f.submit "Place Book on My Shelf"%>
 
 <% end %>

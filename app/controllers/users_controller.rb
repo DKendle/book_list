@@ -45,23 +45,21 @@ class UsersController < ApplicationController
     end
 
     def update
-        user = User.find_by(id: session[:user_id])
-        user.update(user_params)
-        if user.valid?
-            user.save
-            redirect_to user_path(user)
+        @user = User.find_by(id: session[:user_id])
+        @user.update(user_params)
+        if @user.valid?
+            @user.save
+            redirect_to user_path(@user)
         else
             render :edit 
             ##message: Something went wrong, try again.
         end
 
     end
-
+    
+##############################
     def destroy
-       user = User.find_by(id: session[:user_id])
-       user.destroy
-       redirect_to :root
- 
+       
     end
 
     private

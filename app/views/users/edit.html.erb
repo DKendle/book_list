@@ -1,14 +1,23 @@
-<h1>You Made it to: EDIT</h1>
+<h1>Edit User Profile:</h1>
+
+<ul>
+    <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+    <% end%>
+</ul>
+
+
+
 
 <%= form_for @user do |f| %>
     <%= f.label "Username" %>
     <%= f.text_field :username  %>
-
+<br>
     <%= f.label "Email" %>
     <%= f.text_field :email %>
-
+<br>
     <%= f.label "Password" %>
     <%= f.text_field :password %>
-
+<br>
     <%= f.submit "Submit Changes" %>
 <% end %>

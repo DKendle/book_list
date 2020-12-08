@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
             redirect_to user_path(user)
         end
     end
+    
     def create
         user = User.find_by(username: params[:username])
         if !user.nil? && user.authenticate(params[:password])
@@ -13,7 +14,6 @@ class SessionsController < ApplicationController
             redirect_to user_path(user)
         else
            redirect_to :login
-           flash[:message] = "Something went wrong...try again"
         end
 
     end
