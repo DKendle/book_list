@@ -1,8 +1,7 @@
-<h1>You have made it to Booklist's Landing Page</h1>
-<p>Do you have a mountain of books that need to be read, but you're shopping for a new one now?</p>
-<p>Can't remember if you have bought this book before or if you are just a fan of the author?</p>
-<p>Well make yourself at home in our cozy little app that was created to help you keep track of all the book titles in your collection.</p>
+<h1>Welcome to Booklist!</h1>
+<p>Make yourself at home in our cozy little app that was created to help you keep track of all the book titles in your collection.</p>
 
+<h1>Choose One of the Following:</h1>
 
 
 <% if logged_in? && !@user.nil? %>
@@ -12,18 +11,9 @@
 <%= link_to 'Log in with Google', '/auth/google_oauth2'%>
 <% end %>
 
+<br>
 
 
-
-
-
-
-
-
-
-
-
-<h1>Choose One of the Following:</h1>
 
 <b><%= link_to "Sign Up", new_user_path%><b><br>
 

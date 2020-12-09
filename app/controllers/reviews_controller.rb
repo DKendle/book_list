@@ -52,7 +52,6 @@ class ReviewsController < ApplicationController
         else
             render :edit
         end
-        byebug
     end
 
     def destroy
