@@ -3,5 +3,5 @@ class Book < ApplicationRecord
     has_many :users, through: :reviews
     accepts_nested_attributes_for :reviews
     validates_presence_of :title
-    
+    scope :not_read , { where(read: "false" ) }
 end
