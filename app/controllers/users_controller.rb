@@ -1,23 +1,18 @@
 class UsersController < ApplicationController
-    before_action :logged_in?, only: [:show, :edit, :update, :destroy]
-    #before_action :current_user?, only:[:show, :edit, :update, :destroy]
+    before_action :current_user, except: [:index]
    
 
     def show
-        if logged_in? 
-            @user = User.find_by(id: session[:user_id])
-            @user.books.build
+        if !current_user.nil?
+            @current_user.books.build
         else
             redirect_to :root
-            ##message: You need to be logged in to do that.
         end
-
     end
 
     def new
-        @user = User.find_by(id: session[:user_id])
-        if !@user.nil?
-            redirect_to user_path(@user)
+        if !@current_user.nil?
+            redirect_to user_path(@current_user)
         else
             @user = User.new
         end
@@ -36,8 +31,8 @@ class UsersController < ApplicationController
     end
 
     def edit
-        if logged_in?
-            @user = User.find_by(id: session[:user_id])
+        if !@current_user.nil?
+            @current_user = find_user
         else 
             redirect_to :root 
         end
@@ -45,23 +40,20 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = User.find_by(id: session[:user_id])
-        @user.update(user_params)
-        if @user.valid?
-            @user.save
-            redirect_to user_path(@user)
+        @current_user.update(user_params)
+        if @current_user.valid?
+            @current_user.save
+            redirect_to user_path(@current_user)
         else
             render :edit 
-            ##message: Something went wrong, try again.
         end
 
     end
     
-##############################
     def destroy
-       @user = User.find_by(id: session[:user_id])
-       @user.destroy 
+       @current_user.destroy 
        redirect_to :root
+       flash.now[:notice] = "Profile successfully deleted"
     end
 
     private
