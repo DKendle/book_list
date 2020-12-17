@@ -1,0 +1,7 @@
+<h2>You need to Read:</h2>
+
+<ul>
+    <% @books.each do |book| %>
+        <li><%= link_to book.title, user_book_path(@user, book) %> by: <%= book.author%></li>
+    <% end %>
+</ul>

@@ -69,6 +69,11 @@ class BooksController < ApplicationController
         redirect_to user_books_path
     end
 
+    def not_read
+        @user = User.find_by(id: session[:user_id])
+        @books = @user.books.not_read
+    end
+
     private
 
     def book_params
