@@ -19,7 +19,7 @@ If your terminal does not show you are in the current directory you will need to
 #Example of not being in the current directory:
 JohnDow@Johns-Macbook-Pro %
 
-Run the following to get into the current directory:
+#Run the following to get into the current directory:
 cd book-list 
 
 #Example of being in the current directory
@@ -47,36 +47,37 @@ In the list the tcp port number that you will need is after the colon:
 ```ruby
 #We will need the :3000 
 tcp://127.0.0.1:3000
-#Open a browser and prepend localhost to the number and colon list this
+#Open a browser and prepend localhost to the number and colon:
 localhost:3000
 ```
 If the last number at the end of the tcp port is different just substitute that in at the end of the ```localhost:```
 
-Once here you can play around with the application!
+Add that to your browser address bar and hit enter. Once here you can play around with the application!
 
 ### Remember: 
-While running your server any changes to the code that is within the App folder will reflect in your browser window once refreshed. If you make any changes to the routes, database, or anything outside of the App folder they will not be reflected. You will need to hit ```Ctrl-C``` to stop the server and then run the ```rails s``` command to spin it back up again.
+While running your server any changes to the code that is within the ```app``` folder will reflect in your browser window once refreshed. If you make any changes to the routes, database, or anything outside of the ```app``` folder they will not be reflected. You will need to hit ```Ctrl+C``` to stop the server and then run the ```rails s``` command to spin it back up again.
 
 ### Tip: 
-If you close the program without killing the server that tcp port might lock, meaning, you will not be able to use it. You can kill the server and free up the port with a kill command on your computers terminal. I own a Macbook so the following example is for that, but there is a similar command for Windows.
+If you close the program without killing the server that tcp port might locked, meaning, you will not be able to use it. You can kill the server and free up the port with a kill command on your computers terminal. I own a Macbook so the following example is for that, but there are similar commands for Windows.
 ```ruby
 #Brings up the computers terminal, searches for terminal, opens it.
-Cmd+spacebar, type in: terminal, hit enter
+Cmd+spacebar
+#type in: 
+terminal + hit enter
 
 #type in the following with the port number locked after tcp.
-#Ex: if localhost:3000 is locked for me:
+#Ex: if localhost:3000 is locked:
 lsof -i tcp:3000
 
-#A list will pop up like this:
+#A list will pop up similar to this:
 JohnDow@Johns-MacBook-Pro~ % lsof -i tcp:3000
 COMMAND   PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
 ruby    66242 Dina   20u  IPv4 0x8017529134621433      0t0  TCP localhost:hbci (LISTEN)
 ruby    66242 Dina   21u  IPv6 0x801752912cfaf3c3      0t0  TCP localhost:hbci (LISTEN)
 ruby    66242 Dina   22u  IPv4 0x8017529128f607f3      0t0  TCP client.openvpn.net:hbci (LISTEN)
 
-#Tke the PID number and enter this command
-kill -9 <PID> 
-#So with this example I would enter
+#Take the PID number and enter kill -9 <PID> 
+#With the above list in mind:
 kill -9 66242
 ```
 This will kill the server and should free it up for you to access it again through your code editor.
