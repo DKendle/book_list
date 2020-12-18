@@ -1,9 +1,9 @@
-<h2>Review for: <%= link_to @book.title, user_book_path(@user, @book) %></h2>
-<%= link_to "Edit Review", edit_user_review_path(@user)%>
-
+<h2>Reviewed: <%= link_to @book.title, user_book_path( @current_user, @book) %></h2>
+<%= link_to "Edit Review", edit_user_review_path( @current_user)%>
+<%= link_to "Reviews", user_reviews_path(@current_user)%>
 <h3><%= @review.title %></h3>
 <p><%= @review.description %></p>
 
 <hr>
-<%= button_to "Delete Review", user_review_path(@user), method: :delete, data: { confirm: "You you really want to delete this review?"}%>
+<%= button_to "Delete Review", user_review_path( @current_user), method: :delete, data: { confirm: "You you really want to delete this review?"}%>
 

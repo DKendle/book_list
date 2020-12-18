@@ -1,7 +1,10 @@
-<h2>You need to Read:</h2>
+<h2>Need to Read:</h2>
+<%= link_to "User Dashboard", user_path(@current_user) %>
+<%= link_to "Book Collection", user_books_path(@current_user) %>
+<hr class="rounded">
 
 <ul>
     <% @books.each do |book| %>
-        <li><%= link_to book.title, user_book_path(@user, book) %> by: <%= book.author%></li>
+        <li><%= link_to book.title, user_book_path(@current_user, book) %> by: <%= book.author%></li>
     <% end %>
 </ul>

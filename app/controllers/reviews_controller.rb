@@ -1,14 +1,13 @@
 class ReviewsController < ApplicationController
+    before_action :current_user
 
     def index
-        @user = User.find_by(id: session[:user_id])
-        @reviews = @user.reviews
+        @reviews = @current_user.reviews
     end
 
     def show
-        if logged_in?
-            @user = User.find_by(id: session[:user_id])
-            @review = @user.reviews.find_by(id: params[:id])
+        if current_user
+            @review =  @current_user.reviews.find_by(id: params[:id])
             @book = Book.find_by(id: @review.book_id)
         else 
             redirect_to :root 
@@ -16,14 +15,12 @@ class ReviewsController < ApplicationController
     end
 
     def new
-        @user = User.find_by(id: session[:user_id])
         @review = Review.new
     end
 
     def create
-        @user = User.find_by(id: session[:user_id])
         @review = Review.new(review_params)
-        @review.user = @user
+        @review.user = @current_user
         if @review.valid?
             @review.save
             redirect_to user_reviews_path(@review)
@@ -33,9 +30,8 @@ class ReviewsController < ApplicationController
     end
 
     def edit
-        if logged_in?
-            @user = User.find_by(id: session[:user_id])
-            @review = @user.reviews.find_by(id: params[:id])
+        if current_user
+            @review = @current_user.reviews.find_by(id: params[:id])
         else
             redirect_to :root 
         end
@@ -44,8 +40,7 @@ class ReviewsController < ApplicationController
     end
 
     def update
-        @user = User.find_by(id: session[:user_id])
-        @review = @user.reviews.find_by(id: params[:id])
+        @review = @current_user.reviews.find_by(id: params[:id])
         if !@review.nil? && @review.valid?
             @review.update(review_params)
             redirect_to user_review_path(@review)
@@ -55,10 +50,9 @@ class ReviewsController < ApplicationController
     end
 
     def destroy
-        @user = User.find_by(id: session[:user_id])
-        @review = @user.reviews.find_by(id: params[:id])
+        @review = @current_user.reviews.find_by(id: params[:id])
         @review.destroy
-        redirect_to user_reviews_path(@user)
+        redirect_to user_reviews_path(@current_user)
     end
 
     private

@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ hr.rounded {
+    border-top: 8px solid rgb(27, 163, 23);
+    border-radius: 5px;
+  }

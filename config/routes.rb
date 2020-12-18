@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   post "/logout", to: "sessions#destroy"
 
   get "/signup", to: "users#new"
-  #
+  
   get "/not-read", to: "books#not_read"
-  #
-  resources :users, only: [:new, :create, :edit, :update, :destroy]
+  
+  resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
 
   resources :users, only: [:show] do 
     resources :books

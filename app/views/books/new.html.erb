@@ -1,7 +1,7 @@
 <h1>Add a Book to your List:</h1>
-
-
-<%= form_for [@user, @book] do |f| %>
+<%= link_to "User Dashboard", user_path(@current_user)%>
+<hr class="rounded">
+<%= form_for [@current_user, @book] do |f| %>
 
 <%= f.label "Read It"%>
 <%= f.check_box :read %>
@@ -17,7 +17,7 @@
 
 <h3>Leave a Review?</h3>
 <%= f.fields_for :reviews do |ff| %>
-    <%= ff.hidden_field :user_id, value: @user.id %>
+    <%= ff.hidden_field :user_id, value: @current_user.id %>
 
 
     <%= ff.label "Title" %>

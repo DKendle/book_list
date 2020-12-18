@@ -1,17 +1,20 @@
 <h1>Create a New Review:</h1> 
+<%= link_to "User Dashboard", user_path(@current_user) %>
+<%= link_to "Reviews", user_reviews_path%>
+<hr class='rounded'>
 
-<%= form_for [@user, @review] do |f| %>
+<%= form_for [@current_user, @review] do |f| %>
     <%= f.label "Choose a book to Review" %>
-    <%= f.collection_select(:book_id, @user.books, :id, :title)%><br><br>
+    <%= f.collection_select(:book_id, @current_user.books, :id, :title)%><br><br>
 
-    <%= f.label "Title" %>
+    <%= f.label "Title" %><br>
     <%= f.text_field :title %><br><br>
 
-    <%= f.label "Description" %>
+    <%= f.label "Description" %><br>
     <%= f.text_area :description %><br>
 
     <%= f.submit "Submit Review"%>
 
 <% end %>
 <hr>
-No Books to Review? - <%= link_to "Create a New One!", new_user_book_path(@user) %>
+No Books to Review? - <%= link_to "Create a New One!", new_user_book_path(@current_user) %>

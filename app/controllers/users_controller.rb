@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
     before_action :current_user, except: [:index]
    
+    def index
+        redirect_to :root
+    end
 
     def show
         if !current_user.nil?

@@ -1,9 +1,9 @@
 class BooksController < ApplicationController
-    before_action :find_user, except: [:destroy]
+    before_action :current_user
 
     def index
-        if logged_in?
-            @books = @user.books
+        if current_user
+            @books = @current_user.books
         else
             redirect_to :root
         end
@@ -12,8 +12,7 @@ class BooksController < ApplicationController
 
     def show
         if logged_in?
-
-            @book = @user.books.find_by(id: params[:id])
+          find_book
             if @book.nil?
                 redirect_to user_books_path
             end
@@ -24,8 +23,7 @@ class BooksController < ApplicationController
     end
 
     def new
-        if logged_in?
-
+        if current_user
             @book = Book.new
             @book.reviews.build
         else 
@@ -37,7 +35,6 @@ class BooksController < ApplicationController
         @book = Book.new(book_params)
         if @book.valid?
             @book.save
-            #review = book.reviews.create(review_params)
             redirect_to user_books_path
 
         else 
@@ -47,14 +44,13 @@ class BooksController < ApplicationController
     end
 
     def edit
-        if logged_in?
-
-            @book = @user.books.find_by(id: params[:id])    
+        if current_user
+          find_book    
         end
     end
 
     def update
-        @book = @user.books.find_by(id: params[:id])
+      find_book
         if !@book.nil? && @book.valid?
             @book.update(book_params)
             redirect_to user_book_path(@book)
@@ -70,11 +66,14 @@ class BooksController < ApplicationController
     end
 
     def not_read
-        @user = User.find_by(id: session[:user_id])
-        @books = @user.books.not_read
+        @books = @current_user.books.own.not_read
     end
 
     private
+
+    def find_book
+        @book = @current_user.books.find_by(id: params[:id])  
+    end
 
     def book_params
         params.require(:book).permit(:title, :author, :read, :currently_own,

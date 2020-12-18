@@ -1,11 +1,10 @@
 <h1>User Dashboard</h1>
 <%= link_to "Logout",  logout_path, method: :post %>
 <%= link_to "Edit Profile", edit_user_path(@current_user)%>
-<%= link_to "Book Collection", user_books_path(@current_user) %>
+<%= link_to "Books", user_books_path(@current_user) %>
 <%= link_to "Reviews", user_reviews_path(@current_user) %>
-<%= link_to "Need to Read", not_read_path %>
 
-<hr>
+<hr class="rounded">
 
 <h3>Welcome: <%= @current_user.username %></h3>
 
