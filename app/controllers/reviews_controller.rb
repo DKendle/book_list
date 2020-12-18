@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
 
     def show
         if current_user
-            @review =  @current_user.reviews.find_by(id: params[:id])
+            find_review
             @book = Book.find_by(id: @review.book_id)
         else 
             redirect_to :root 
@@ -15,7 +15,11 @@ class ReviewsController < ApplicationController
     end
 
     def new
-        @review = Review.new
+        if current_user
+            @review = Review.new
+        else
+            redirect_to :root 
+        end
     end
 
     def create
@@ -23,24 +27,24 @@ class ReviewsController < ApplicationController
         @review.user = @current_user
         if @review.valid?
             @review.save
-            redirect_to user_reviews_path(@review)
+            redirect_to user_book_path(@review.user_id, @review.book_id)
         else
             render :new
         end
+        byebug
     end
 
     def edit
         if current_user
-            @review = @current_user.reviews.find_by(id: params[:id])
+            find_review
         else
             redirect_to :root 
         end
     
-            
     end
 
     def update
-        @review = @current_user.reviews.find_by(id: params[:id])
+        find_review
         if !@review.nil? && @review.valid?
             @review.update(review_params)
             redirect_to user_review_path(@review)
@@ -50,12 +54,16 @@ class ReviewsController < ApplicationController
     end
 
     def destroy
-        @review = @current_user.reviews.find_by(id: params[:id])
+        find_review
         @review.destroy
         redirect_to user_reviews_path(@current_user)
     end
 
     private
+
+    def find_review
+        @review = @current_user.reviews.find_by(id: params[:id])
+    end
 
     def review_params
         params.require(:review).permit(:title, :description, :rating, :user_id, :book_id)
