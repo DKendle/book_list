@@ -14,11 +14,7 @@ class SessionsController < ApplicationController
         end
 
     end
-
-
-    #will log a user in
     
-    #will end a user's session by clearing a session value
     def destroy
         session.delete :user_id
         redirect_to :root

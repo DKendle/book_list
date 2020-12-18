@@ -1,7 +1,14 @@
 <h1>Create a New Review:</h1> 
 <%= link_to "User Dashboard", user_path(@current_user) %>
 <%= link_to "Reviews", user_reviews_path%>
+
 <hr class='rounded'>
+
+
+<% flash.each do |name, msg| %>
+  <b><%= content_tag :div, msg, class: 'alert' %></b>
+<% end %>
+
 
 <%= form_for [@current_user, @review] do |f| %>
     <%= f.label "Choose a book to Review" %>

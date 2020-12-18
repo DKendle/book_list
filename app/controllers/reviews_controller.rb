@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
     end
 
     def show
-        if current_user
+        if current_user 
             find_review
             @book = Book.find_by(id: @review.book_id)
         else 
@@ -27,11 +27,11 @@ class ReviewsController < ApplicationController
         @review.user = @current_user
         if @review.valid?
             @review.save
-            redirect_to user_book_path(@review.user_id, @review.book_id)
+            redirect_to user_book_path(@review.user_id, @review.book)
         else
+            flash.now[:alert] = "Please Select a Book to Review"
             render :new
         end
-        byebug
     end
 
     def edit
